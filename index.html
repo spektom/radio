@@ -2,15 +2,34 @@
 <html>
   <head>
     <style>
-      audio { display:block; margin-bottom:1em; }
+      audio { width: 100%; }
+      .player { padding: 1em; text-align: center; }
     </style>
   </head>
   <body>
-    <audio controls preload=none title="1.FM 50s 60s">
-      <source src="http://sc2b-sjc.1.fm:7028" />
-    </audio>
-    <audio controls preload=none title="1.FM Smooth Jazz">
-      <source src="http://205.164.35.127:80" />
-    </audio>
+    <div class="player">
+      <h2>1.FM 50s 60s</h2>
+      <audio controls preload=none>
+        <source src="http://sc2b-sjc.1.fm:7028/?type=.ogg"/>
+      </audio>
+    </div>
+    <div class="player">
+      <h2>1.FM Euro 80s</h2>
+      <audio controls preload=none>
+        <source src="http://sc2b-sjc.1.fm:7032/?type=.ogg"/>
+      </audio>
+    </div>
+    <div class="player">
+      <h2>Jazz24</h2>
+      <audio controls preload=none>
+        <source src="http://icy1.abacast.com:80/kplu-jazz24aac-64"/>
+      </audio>
+    </div>
+    <div class="player">
+      <h2>Chinese Classical Music</h2>
+      <audio controls preload=none>
+        <source src="http://radio.chinesemusicworld.com:8202/;985179504350671stream.nsv"/>
+      </audio>
+    </div>
   </body>
 </html>
