@@ -3,34 +3,35 @@
   <head>
     <title>Michael's Radio List</title>
     <style>
-      audio { width: 100%; }
-      .player { padding: 1em; text-align: center; }
+      body { background-color: black; }
+      #outer { width: 100%; text-align: center; }
+      #inner { display: inline-block; margin: 0 auto; width: 300px; text-align: left; }
+      #inner * { width: 100%; margin-bottom: 5px; }
+      #station { background-color: chartreuse; }
+      #player { background-color: azure; }
     </style>
   </head>
   <body>
-    <div class="player">
-      <h2>1.FM 50s 60s</h2>
-      <audio controls preload=none>
-        <source src="http://sc2b-sjc.1.fm:7028/?type=.ogg"/>
-      </audio>
+    <div id="outer">
+      <div id="inner">
+        <select name="station" id="station" onchange="OnStationChange();">
+          <option value="http://sc2b-sjc.1.fm:7028/?type=.ogg">1.FM 50s 60s</option>
+          <option value="http://sc2b-sjc.1.fm:7032/?type=.ogg">1.FM 80s</option>
+          <option value="https://retro70.hostingradio.ru:8025/retro70-128.mp3">Retro FM 70s</option>
+          <option value="https://retro80.hostingradio.ru:8025/retro80-128.mp3">Retro FM 80s</option>
+          <option value="https://retro90.hostingradio.ru:8025/retro90-128.mp3">Retro FM 90s</option>
+        </select>
+        <audio id="player" controls preload=none></audio>
+      </div>
     </div>
-    <div class="player">
-      <h2>1.FM Euro 80s</h2>
-      <audio controls preload=none>
-        <source src="http://sc2b-sjc.1.fm:7032/?type=.ogg"/>
-      </audio>
-    </div>
-    <div class="player">
-      <h2>Jazz24</h2>
-      <audio controls preload=none>
-        <source src="http://icy1.abacast.com:80/kplu-jazz24aac-64"/>
-      </audio>
-    </div>
-    <div class="player">
-      <h2>Chinese Classical Music</h2>
-      <audio controls preload=none>
-        <source src="http://radio.chinesemusicworld.com:8202/;985179504350671stream.nsv"/>
-      </audio>
-    </div>
+    <script>
+      function OnStationChange() {
+        var player = document.getElementById("player");
+        player.pause();
+        var station = document.getElementById("station");
+        player.src = station.value;
+        player.play();
+      }
+    </script>
   </body>
 </html>
