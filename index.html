@@ -5,33 +5,69 @@
     <style>
       body { background-color: black; }
       #outer { width: 100%; text-align: center; }
-      #inner { display: inline-block; margin: 0 auto; width: 300px; text-align: left; }
-      #inner * { width: 100%; margin-bottom: 5px; }
-      #station { background-color: chartreuse; }
-      #player { background-color: azure; }
+      #inner { display: inline-block; margin: 0 auto; width: 300px; }
+      img { margin: 50px 0; }
+      #control { width: 100%; margin: 0; padding: 0; white-space: nowrap; }
+      #control * { height: 50px; display: inline-block; }
+      #station { width: 245px; background-color: chartreuse; border: 0; }
+      #button { width: 50px; padding: 0; margin-left: 2px; }
+      #player { display: none; }
     </style>
   </head>
   <body>
     <div id="outer">
       <div id="inner">
-        <select name="station" id="station" onchange="OnStationChange();">
-          <option value="http://sc2b-sjc.1.fm:7028/?type=.ogg">1.FM 50s 60s</option>
-          <option value="http://sc2b-sjc.1.fm:7032/?type=.ogg">1.FM 80s</option>
-          <option value="https://retro70.hostingradio.ru:8025/retro70-128.mp3">Retro FM 70s</option>
-          <option value="https://retro80.hostingradio.ru:8025/retro80-128.mp3">Retro FM 80s</option>
-          <option value="https://retro90.hostingradio.ru:8025/retro90-128.mp3">Retro FM 90s</option>
-        </select>
-        <audio id="player" controls preload=none></audio>
+        <img src="img.png"/>
+        <div id="control">
+          <select name="station" id="station" onchange="OnStationChange();">
+            <option value="http://sc2b-sjc.1.fm:7028/?type=.ogg">1.FM 50s 60s</option>
+            <option value="http://sc2b-sjc.1.fm:7032/?type=.ogg">1.FM 80s</option>
+            <option value="https://retro70.hostingradio.ru:8025/retro70-128.mp3">Retro FM 70s</option>
+            <option value="https://retro80.hostingradio.ru:8025/retro80-128.mp3">Retro FM 80s</option>
+            <option value="https://retro90.hostingradio.ru:8025/retro90-128.mp3">Retro FM 90s</option>
+          </select>
+          <button id="button" onclick="OnButtonClick();"></button>
+          <audio id="player" controls preload=none />
+        </div>
       </div>
     </div>
+
     <script>
-      function OnStationChange() {
-        var player = document.getElementById("player");
-        player.pause();
+      function GetPlayer() {
+        return document.getElementById("player");
+      }
+
+      function UpdateButton() {
+        var button = document.getElementById("button");
+        button.innerHTML = GetPlayer().paused ? "&#9654;&#65039;" : "&#9208;&#65039;";
+      }
+
+      function Play() {
         var station = document.getElementById("station");
+        var player = GetPlayer();
         player.src = station.value;
         player.play();
+        UpdateButton();
       }
+
+      function Stop() {
+        GetPlayer().pause();
+        UpdateButton();
+      }
+
+      function OnStationChange() {
+        Play();
+      }
+
+      function OnButtonClick() {
+        if (GetPlayer().paused) {
+          Play();
+        } else {
+          Stop();
+        }
+      }
+
+      UpdateButton();
     </script>
   </body>
 </html>
