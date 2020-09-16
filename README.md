@@ -1,5 +1,2 @@
-radio
-======
-
-[Radio](https://bit.ly/ms_radio).
+[Play](https://bit.ly/ms_radio)
 
