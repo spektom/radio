@@ -10,7 +10,7 @@
       #control { width: 100%; margin: 0; padding: 0; white-space: nowrap; }
       #control * { height: 50px; display: inline-block; }
       #station { width: 245px; background-color: chartreuse; border: 0; -webkit-appearance: none; border-radius: 0; }
-      #button { width: 50px; padding: 0; margin-left: 2px; -webkit-appearance: none; border-radius: 0; }
+      #button { width: 50px; padding: 0; margin-left: 2px; cursor: pointer; font-size: 40px; vertical-align: bottom; color: white; }
       #player { display: none; }
     </style>
   </head>
@@ -26,7 +26,7 @@
             <option value="https://retro80.hostingradio.ru:8025/retro80-128.mp3">Retro FM 80s</option>
             <option value="https://retro90.hostingradio.ru:8025/retro90-128.mp3">Retro FM 90s</option>
           </select>
-          <button id="button" onclick="OnButtonClick();"></button>
+          <span id="button" onclick="OnButtonClick();"></span>
           <audio id="player" controls preload=none />
         </div>
       </div>
