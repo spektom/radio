@@ -3,31 +3,53 @@
   <head>
     <title>Michael's Radio</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="picnic.min.css" />
     <style type="text/css">
       body { background-color: black; }
-      #outer { width: 100%; text-align: center; }
-      #inner { display: inline-block; margin: 0 auto; width: 600px; }
-      #inner * { width: 100%; }
       img { margin-top: 5em; }
+      #container {
+        padding: 20px;
+        max-width: 960px;
+        width: 100%;
+        margin: auto;
+      }
       #stations {
-        height: 200px; font-size: 5em; margin-top: 1.5em; background-color: chartreuse;
-        -webkit-appearance: none; border: 0; border-radius: 0; text-align: center;
+        height: 250px;
+        font-size: 5em;
+        margin-top: 100px;
+        background-color: chartreuse;
+        -webkit-appearance: none;
+        border: 0;
+        border-radius: 0;
+        text-align: center;
       }
-      #button {
-        height: 512px; padding: 0; margin: 0 auto; cursor: pointer;
-        background-repeat: no-repeat; background-position: center;
+      #buttons {
+        margin-top: 100px;
       }
-      #button.play { background-image: url(img/play.png); }
-      #button.pause { background-image: url(img/pause.png); }
+      .button {
+        height: 250px;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+      }
+      .button.play { background-image: url(img/play.png); }
+      .button.pause { background-image: url(img/pause.png); }
+      .button.prev { background-image: url(img/previous.png); }
+      .button.next { background-image: url(img/next.png); }
       #player { display: none; }
     </style>
   </head>
   <body>
-    <div id="outer">
-      <div id="inner">
+    <div id="container">
+      <div class="flex one center">
         <img src="img/radio.png" />
         <select id="stations" onchange="Play();"></select>
-        <div id="button" onclick="OnButtonClick();"></div>
+        <div id="buttons" class="flex three">
+          <span class="pseudo button prev" onclick="OnPrevClick();"></span>
+          <span id="play-button" class="pseudo button play" onclick="OnPlayClick();"></span>
+          <span class="pseudo button next" onclick="OnNextClick();"></span>
+        </div>
         <audio id="player" controls preload="none" />
       </div>
     </div>
@@ -57,9 +79,11 @@
         });
       }
 
-      function UpdateButton() {
-        var button = document.getElementById("button");
-        button.className = GetPlayer().paused ? "play" : "pause";
+      function UpdateButtons() {
+        var button = document.getElementById("play-button");
+        button.classList.remove("play");
+        button.classList.remove("pause");
+        button.classList.add(GetPlayer().paused ? "play" : "pause");
       }
 
       function Play() {
@@ -67,22 +91,35 @@
         var player = GetPlayer();
         player.src = stations.value;
         player.play();
-        UpdateButton();
+        UpdateButtons();
         document.title = stations.options[stations.selectedIndex].text;
       }
 
       function Stop() {
         GetPlayer().pause();
-        UpdateButton();
+        UpdateButtons();
       }
 
-      function OnButtonClick() {
+      function OnPlayClick() {
         if (GetPlayer().paused) Play();
         else Stop();
       }
 
+      function OnPrevClick() {
+        var stations = GetStations();
+        var newIndex = stations.selectedIndex - 1;
+        stations.selectedIndex = newIndex < 0 ? stations.length - 1 : newIndex;
+        Play();
+      }
+
+      function OnNextClick() {
+        var stations = GetStations();
+        stations.selectedIndex = (stations.selectedIndex + 1) % stations.length;
+        Play();
+      }
+
       LoadStations();
-      UpdateButton();
+      UpdateButtons();
     </script>
   </body>
 </html>
