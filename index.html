@@ -9,12 +9,25 @@
       img { margin-top: 5em; }
       #container {
         padding: 20px;
-        max-width: 960px;
-        width: 100%;
         margin: auto;
       }
+      @media (min-width: 1200px) {
+        #container { width: 40%; }
+        #stations { height: 150px; }
+      }
+      @media (min-width: 768px) and (max-width: 979px) {
+        #container { width: 50%; }
+        #stations { height: 150px; }
+      }
+      @media (max-width: 767px) {
+        #container { width: 50%; }
+        #stations { height: 150px; }
+      }
+      @media (max-width: 480px) {
+        #container { width: 90%; }
+        #stations { height: 250px; }
+      }
       #stations {
-        height: 250px;
         font-size: 5em;
         margin-top: 100px;
         background-color: chartreuse;
@@ -24,7 +37,7 @@
         text-align: center;
       }
       #buttons {
-        margin-top: 100px;
+        margin-top: 10%;
       }
       .button {
         height: 250px;
