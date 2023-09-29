@@ -1,0 +1,93 @@
+body {
+    background-color: black;
+}
+
+img {
+    margin-top: 5em;
+}
+
+#container {
+    padding: 20px;
+    margin: auto;
+}
+
+@media (min-width: 1200px) {
+    #container {
+        width: 40%;
+    }
+
+    #stations {
+        height: 150px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    #container {
+        width: 50%;
+    }
+
+    #stations {
+        height: 150px;
+    }
+}
+
+@media (max-width: 767px) {
+    #container {
+        width: 50%;
+    }
+
+    #stations {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    #container {
+        width: 90%;
+    }
+
+    #stations {
+        height: 250px;
+    }
+}
+
+#stations {
+    font-size: 3em;
+    margin-top: 100px;
+    background-color: chartreuse;
+    border: 0;
+    border-radius: 0;
+    text-align: center;
+}
+
+#buttons {
+    margin-top: 10%;
+}
+
+.button {
+    height: 250px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+#playButton {
+    background-image: url(img/play.png);
+}
+
+#playButton.playing {
+    background-image: url(img/pause.png);
+}
+
+#prevButton {
+    background-image: url(img/previous.png);
+}
+
+#nextButton {
+    background-image: url(img/next.png);
+}
+
+#player {
+    display: none;
+}

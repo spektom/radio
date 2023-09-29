@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Office Lounge",
+        "url": "https://pub0302.101.ru:8443/stream/pro/aac/64/30"
+    },
+    {
+        "name": "1.FM 50s 60s",
+        "url": "http://sc2b-sjc.1.fm:7028/?type=.ogg"
+    },
+    {
+        "name": "1.FM 80s",
+        "url": "http://sc2b-sjc.1.fm:7032/?type=.ogg"
+    },
+    {
+        "name": "Retro FM 70s",
+        "url": "https://retro70.hostingradio.ru:8025/retro70-128.mp3"
+    },
+    {
+        "name": "Retro FM 80s",
+        "url": "https://retro80.hostingradio.ru:8025/retro80-128.mp3"
+    },
+    {
+        "name": "Retro FM 90s",
+        "url": "https://retro90.hostingradio.ru:8025/retro90-128.mp3"
+    },
+    {
+        "name": "Чипльдук",
+        "url": "http://radio.4duk.ru/4duk128.mp3"
+    },
+    {
+        "name": "Chinese Music World",
+        "url": "https://radio.chinesemusicworld.com/chinesemusic.ogg"
+    }
+]

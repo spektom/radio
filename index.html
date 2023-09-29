@@ -1,138 +1,32 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Michael's Radio</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="picnic.min.css" />
-    <style type="text/css">
-      body { background-color: black; }
-      img { margin-top: 5em; }
-      #container {
-        padding: 20px;
-        margin: auto;
-      }
-      @media (min-width: 1200px) {
-        #container { width: 40%; }
-        #stations { height: 150px; }
-      }
-      @media (min-width: 768px) and (max-width: 979px) {
-        #container { width: 50%; }
-        #stations { height: 150px; }
-      }
-      @media (max-width: 767px) {
-        #container { width: 50%; }
-        #stations { height: 150px; }
-      }
-      @media (max-width: 480px) {
-        #container { width: 90%; }
-        #stations { height: 250px; }
-      }
-      #stations {
-        font-size: 3em;
-        margin-top: 100px;
-        background-color: chartreuse;
-        -webkit-appearance: none;
-        border: 0;
-        border-radius: 0;
-        text-align: center;
-      }
-      #buttons {
-        margin-top: 10%;
-      }
-      .button {
-        height: 250px;
-        cursor: pointer;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-      }
-      .button.play { background-image: url(img/play.png); }
-      .button.pause { background-image: url(img/pause.png); }
-      .button.prev { background-image: url(img/previous.png); }
-      .button.next { background-image: url(img/next.png); }
-      #player { display: none; }
-    </style>
-  </head>
-  <body>
-    <div id="container">
-      <div class="flex one center">
-        <img src="img/radio.png" />
-        <select id="stations" onchange="Play();"></select>
-        <div id="buttons" class="flex three">
-          <span class="pseudo button prev" onclick="OnPrevClick();"></span>
-          <span id="play-button" class="pseudo button play" onclick="OnPlayClick();"></span>
-          <span class="pseudo button next" onclick="OnNextClick();"></span>
-        </div>
-        <audio id="player" controls preload="none" />
+<html lang="en">
+
+<head>
+  <title>Michael's Radio</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width" />
+  
+  <link type="image/png" sizes="32x32" rel="icon" href="static/img/radio-32.png">
+  <link rel="stylesheet" href="static/picnic.min.css" />
+  <link rel="stylesheet" href="static/main.css" />
+</head>
+
+<body>
+  <div id="container">
+    <div class="flex one center">
+      <img src="static/img/radio.png" title="Radio" />
+      <select id="stations" title="Select radio station"></select>
+      <div id="buttons" class="flex three">
+        <span id="prevButton" class="pseudo button"></span>
+        <span id="playButton" class="pseudo button"></span>
+        <span id="nextButton" class="pseudo button"></span>
       </div>
+      <audio id="player" controls preload="none" />
     </div>
+  </div>
 
-    <script>
-      function GetPlayer() {
-        return document.getElementById("player");
-      }
-      
-      function GetStations() {
-        return document.getElementById("stations");
-      }
+  <script src="static/main.js"></script>
+</body>
 
-      function LoadStations() {
-        var stationsList = {
-          "1.FM 50s 60s": "http://sc2b-sjc.1.fm:7028/?type=.ogg",
-          "1.FM 80s": "http://sc2b-sjc.1.fm:7032/?type=.ogg",
-          "Retro FM 70s": "https://retro70.hostingradio.ru:8025/retro70-128.mp3",
-          "Retro FM 80s": "https://retro80.hostingradio.ru:8025/retro80-128.mp3",
-          "Retro FM 90s": "https://retro90.hostingradio.ru:8025/retro90-128.mp3",
-          "Чипльдук": "http://radio.4duk.ru/4duk128.mp3",
-          "Chinese Music World": "https://radio.chinesemusicworld.com/chinesemusic.ogg"
-        };
-        var stations = GetStations();
-        Object.keys(stationsList).forEach(function(key) {
-          stations.options[stations.options.length] = new Option(key, stationsList[key]);
-        });
-      }
-
-      function UpdateButtons() {
-        var button = document.getElementById("play-button");
-        button.classList.remove("play");
-        button.classList.remove("pause");
-        button.classList.add(GetPlayer().paused ? "play" : "pause");
-      }
-
-      function Play() {
-        var stations = GetStations();
-        var player = GetPlayer();
-        player.src = stations.value;
-        player.play();
-        UpdateButtons();
-        document.title = stations.options[stations.selectedIndex].text;
-      }
-
-      function Stop() {
-        GetPlayer().pause();
-        UpdateButtons();
-      }
-
-      function OnPlayClick() {
-        if (GetPlayer().paused) Play();
-        else Stop();
-      }
-
-      function OnPrevClick() {
-        var stations = GetStations();
-        var newIndex = stations.selectedIndex - 1;
-        stations.selectedIndex = newIndex < 0 ? stations.length - 1 : newIndex;
-        Play();
-      }
-
-      function OnNextClick() {
-        var stations = GetStations();
-        stations.selectedIndex = (stations.selectedIndex + 1) % stations.length;
-        Play();
-      }
-
-      LoadStations();
-      UpdateButtons();
-    </script>
-  </body>
 </html>
